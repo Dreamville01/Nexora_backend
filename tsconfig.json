@@ -1,5 +1,5 @@
 {
-  "//": "OrbitChain API TypeScript configuration",
+  "//": "Nexora API TypeScript configuration",
   "compilerOptions": {
     "module": "node16",
     "moduleResolution": "node16",
