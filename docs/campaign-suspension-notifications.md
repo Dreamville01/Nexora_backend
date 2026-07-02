@@ -278,7 +278,7 @@ describe('NotificationsService.sendCampaignSuspensionEmail', () => {
 
 ## Support Email Configuration
 
-Default support email: `support@orbitchain.io`
+Default support email: `support@nexora.io`
 
 To customize, pass `supportEmail` in the payload:
 
