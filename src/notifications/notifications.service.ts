@@ -186,7 +186,7 @@ export class NotificationsService {
       );
     }
 
-    const supportEmail = payload.supportEmail || 'support@orbitchain.io';
+    const supportEmail = payload.supportEmail || 'support@nexora.io';
     const template = campaignSuspensionTemplate;
     const html = template.html({
       campaignTitle: payload.campaignTitle,

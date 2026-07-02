@@ -16,7 +16,7 @@ describe('CampaignsService milestone target validation', () => {
   });
 
   const baseDto = {
-    title: 'Orbit funding round',
+    title: 'Nexora funding round',
     goalAmount: '100',
   };
 

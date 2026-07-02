@@ -18,7 +18,7 @@ import { NotificationsGateway } from './notifications.gateway';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        secret: config.get<string>('JWT_SECRET', 'orbitchain-default-secret'),
+        secret: config.get<string>('JWT_SECRET', 'nexora-default-secret'),
         signOptions: { expiresIn: '15m' },
       }),
     }),

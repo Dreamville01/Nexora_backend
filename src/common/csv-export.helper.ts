@@ -8,7 +8,7 @@
  * consumers (tax tools, accounting software, partner integrations) could
  * silently trust an incorrect value.
  *
- * See: https://github.com/OrbitChainLabs/OrbitChain-API/issues/15
+ * See the internal security review for the rationale.
  */
 
 export interface DonationCsvRow {
