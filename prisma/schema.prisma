@@ -1,4 +1,4 @@
-// Prisma schema for OrbitChain API
+// Prisma schema for Nexora API
 // Docs: https://pris.ly/d/prisma-schema
 
 generator client {
