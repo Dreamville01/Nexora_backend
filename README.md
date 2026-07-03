@@ -101,9 +101,15 @@ npx prisma generate
 # Run migrations
 npx prisma migrate dev --name init
 
+# Seed local development data
+npx prisma db seed
+
 # (Optional) Open Prisma Studio
 npx prisma studio
 ```
+
+The seed command is idempotent and creates representative local users,
+campaigns, milestones, and donations for contributor testing.
 
 ---
 

@@ -23,6 +23,9 @@
     "prisma:studio": "prisma studio",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
+  },
   "dependencies": {
     "@bull-board/api": "^6.10.4",
     "@bull-board/express": "^6.10.4",
