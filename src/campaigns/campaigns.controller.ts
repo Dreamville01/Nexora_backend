@@ -16,6 +16,7 @@ import {
 } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import type { Cache } from 'cache-manager';
+import { ApiOkResponse } from '@nestjs/swagger';
 import { CampaignsService } from './campaigns.service';
 import type { CampaignStats } from './interfaces/campaign-stats.interface';
 import { Roles } from '../common/decorators/roles.decorator';
@@ -93,6 +94,10 @@ export class CampaignsController {
   }
 
   @Get()
+  @ApiOkResponse({
+    description: 'Paginated list of campaigns',
+    type: BrowseCampaignsResponseDto,
+  })
   async browseCampaigns(
     @Query() query: BrowseCampaignsQueryDto,
   ): Promise<BrowseCampaignsResponseDto> {

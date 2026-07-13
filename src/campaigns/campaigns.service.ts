@@ -15,6 +15,7 @@ import { CreateCampaignDto } from './dto/create-campaign.dto';
 import { UpdateCampaignDto } from './dto/update-campaign.dto';
 import type { CreateUpdateDto } from './dto/create-update.dto';
 import { ContractBalanceResponseDto } from './dto/contract-balance.dto';
+import { PaginationMetaDto } from '../common/dto/paginated-response.dto';
 
 const MIN_MILESTONE_TARGET_AMOUNT = 0.0000001;
 
@@ -154,7 +155,7 @@ export class CampaignsService {
       }),
     ]);
 
-    return { data: campaigns, total, page, limit };
+    return { data: campaigns, meta: new PaginationMetaDto(total, page, limit) };
   }
 
   /** Returns up to 6 featured, non-DRAFT campaigns sorted by recent activity */
@@ -437,9 +438,10 @@ export class CampaignsService {
     ]);
 
     const total = countRow[0]?.count ?? 0;
+    const meta = new PaginationMetaDto(total, page, limit);
     const ids = rankedRows.map((r) => r.id);
     if (ids.length === 0) {
-      return { data: [], total, page, limit };
+      return { data: [], meta };
     }
 
     const campaigns = await this.prisma.campaign.findMany({
@@ -450,7 +452,7 @@ export class CampaignsService {
     const byId = new Map(campaigns.map((c) => [c.id, c]));
     const ordered = ids.map((id) => byId.get(id)).filter(Boolean) as any[];
 
-    return { data: ordered, total, page, limit };
+    return { data: ordered, meta };
   }
 }
 
