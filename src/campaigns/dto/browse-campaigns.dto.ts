@@ -7,6 +7,8 @@ import {
   IsString,
   IsIn,
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { PaginationMetaDto } from '../../common/dto/paginated-response.dto';
 
 /** Query DTO for browsing campaigns with pagination, filtering, and sorting */
 export class BrowseCampaignsQueryDto {
@@ -43,8 +45,12 @@ export class BrowseCampaignsQueryDto {
 }
 
 export class BrowseCampaignsResponseDto {
+  @ApiProperty({
+    isArray: true,
+    description: 'Campaigns for the requested page',
+  })
   data: any[];
-  total: number;
-  page: number;
-  limit: number;
+
+  @ApiProperty({ type: PaginationMetaDto })
+  meta: PaginationMetaDto;
 }

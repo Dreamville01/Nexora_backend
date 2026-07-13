@@ -71,3 +71,58 @@ describe('CampaignsService milestone target validation', () => {
     );
   });
 });
+
+describe('CampaignsService browseCampaigns pagination', () => {
+  const prisma = {
+    campaign: {
+      count: jest.fn(),
+      findMany: jest.fn(),
+    },
+    $transaction: jest.fn(),
+  };
+
+  let service: CampaignsService;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    service = new CampaignsService(prisma as any, {} as any);
+  });
+
+  it('returns data alongside pagination meta (total/page/pageSize/totalPages)', async () => {
+    const campaigns = [{ id: 'campaign-1' }, { id: 'campaign-2' }];
+    prisma.$transaction.mockResolvedValue([23, campaigns]);
+
+    const result = await service.browseCampaigns({
+      page: 2,
+      limit: 10,
+      sortBy: 'newest',
+    });
+
+    expect(result).toEqual({
+      data: campaigns,
+      meta: {
+        total: 23,
+        page: 2,
+        pageSize: 10,
+        totalPages: 3,
+      },
+    });
+  });
+
+  it('computes zero totalPages when there are no matching campaigns', async () => {
+    prisma.$transaction.mockResolvedValue([0, []]);
+
+    const result = await service.browseCampaigns({
+      page: 1,
+      limit: 10,
+      sortBy: 'newest',
+    });
+
+    expect(result.meta).toEqual({
+      total: 0,
+      page: 1,
+      pageSize: 10,
+      totalPages: 0,
+    });
+  });
+});
