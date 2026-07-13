@@ -32,10 +32,7 @@ export class JwtAuthGuard implements CanActivate {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const payload = this.jwt.verify(token, {
-        secret: this.config.get<string>(
-          'JWT_SECRET',
-          'nexora-default-secret',
-        ),
+        secret: this.config.get<string>('JWT_SECRET', 'nexora-default-secret'),
       });
       request.user = payload as Record<string, unknown>;
       return true;

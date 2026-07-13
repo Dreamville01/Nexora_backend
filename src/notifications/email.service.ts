@@ -27,10 +27,7 @@ export class EmailService {
   private readonly appBaseUrl: string;
 
   constructor(private readonly config: ConfigService) {
-    this.fromAddress = config.get<string>(
-      'EMAIL_FROM',
-      'noreply@nexora.io',
-    );
+    this.fromAddress = config.get<string>('EMAIL_FROM', 'noreply@nexora.io');
     this.appBaseUrl = config.get<string>(
       'APP_BASE_URL',
       'http://localhost:3000',
