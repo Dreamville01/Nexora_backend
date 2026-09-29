@@ -25,7 +25,13 @@ export class RedisHealthIndicator extends HealthIndicator {
 
   async isHealthy(key: string): Promise<HealthIndicatorResult> {
     try {
-      await this.client.ping();
+      if (this.client.status === 'end' || this.client.status === 'close') {
+        await this.client.connect();
+      }
+      const pong = await this.client.ping();
+      if (pong !== 'PONG') {
+        throw new Error(`Unexpected PING response: ${pong}`);
+      }
       return this.getStatus(key, true);
     } catch {
       throw new HealthCheckError(

@@ -8,5 +8,6 @@ import { RedisHealthIndicator } from './redis.health';
   imports: [TerminusModule],
   controllers: [HealthController],
   providers: [RedisHealthIndicator],
+  exports: [RedisHealthIndicator],
 })
 export class HealthModule {}
